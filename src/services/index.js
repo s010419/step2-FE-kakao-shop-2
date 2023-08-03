@@ -1,8 +1,10 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+const staticServerUrl = process.env.REACT_APP_PATH || "";
+
 export const instance = axios.create({
-  baseURL: staticServerUri + "/api",
+  baseURL: staticServerUrl + "/api",
   timeout: 1000,
   headers: {
     "Content-Type": "application/json",
