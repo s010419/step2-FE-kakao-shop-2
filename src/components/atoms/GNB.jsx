@@ -48,9 +48,7 @@ function GNB() {
               {/* 로그인 상태에 따라 다른 UI 표시 */}
               {token ? (
                 <>
-                  {/* 로그인 상태일 때 사용자 이름과 로그아웃 버튼 */}
-                  <span>{token}님</span>
-                  <span className="line">|</span>
+                  {/* 로그인 상태일 때 로그아웃 버튼 */}
                   <button
                     onClick={handleLogout}
                     style={{
