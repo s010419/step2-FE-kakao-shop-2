@@ -16,7 +16,7 @@ function GNB() {
     // 로컬 스토리지에서 토큰 제거
     localStorage.removeItem("token");
     // Redux 상태에서 토큰을 null로 설정하여 로그아웃 상태로 변경
-    dispatch(setToken(null));
+    dispatch(setToken({ token: null }));
     alert("정상적으로 로그아웃되었습니다.");
   };
 
