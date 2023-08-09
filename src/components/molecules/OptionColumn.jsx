@@ -54,18 +54,6 @@ const OptionColumn = ({ product }) => {
   // 장바구니 담기 api 처리
   const { mutate } = useMutation({
     mutationFn: addCart,
-    onError: (error) => {
-      if (error.response && error.response.status === 401) {
-        // 401 Unauthorized 에러 발생 시
-        alert("로그인 후 이용해주세요.");
-        navigate(staticServerUrl + "/login"); // 로그인 페이지로 이동
-      } else {
-        alert("장바구니 담기에 실패했습니다. 오류: " + error.message);
-      }
-    },
-    onSuccess: () => {
-      alert("장바구니에 담겼습니다.");
-    },
   });
 
   return (
@@ -115,14 +103,24 @@ const OptionColumn = ({ product }) => {
         {/* 장바구니 담기 버튼 위치 */}
         <Button
           onClick={() => {
-            mutate(
-              selectedOptions.map((el) => {
-                return {
-                  optionId: el.optionId,
-                  quantity: el.quantity,
-                };
-              })
-            );
+            const requestData = selectedOptions.map((el) => ({
+              optionId: el.optionId,
+              quantity: el.quantity,
+            }));
+
+            mutate(requestData, {
+              onSuccess: () => {
+                alert("장바구니에 담겼습니다.");
+              },
+              onError: (error) => {
+                if (error.response && error.response.status === 401) {
+                  alert("로그인 후 이용해주세요.");
+                  navigate(staticServerUrl + "/login");
+                } else {
+                  alert("장바구니 담기에 실패했습니다. 오류: " + error.message);
+                }
+              },
+            });
           }}
         >
           장바구니 담기
