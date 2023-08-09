@@ -1,27 +1,26 @@
 import { comma } from "../../utils/convert";
 import Card from "../atoms/Card";
 import Photo from "../atoms/Photo";
-import styles from "./ProductCard.module.css";
 
 const staticServerUrl = process.env.REACT_APP_PATH || "";
 
 const ProductCard = ({ product }) => {
   return (
     <Card
-      className={`${styles["product-card"]}`}
+      className="bg-gray-100 rounded-lg p-2 m-2 w-250"
       to={staticServerUrl + `/product/${product.id}`}
     >
-      <div className={`${styles["product-photo"]}`}>
+      <div className="h-240">
         <Photo
           src={product.image}
           alt={product.productName}
-          className={`${styles["product-photo"]} rounded-lg`}
+          className="rounded-lg object-cover h-full w-full"
         />
       </div>
-      <div className={`${styles["product-name"]}`}>{product.productName}</div>
-      <div className={`${styles["product-price"]}`}>
-        {comma(product.price)}원
+      <div className="text-sm font-medium text-gray-500">
+        {product.productName}
       </div>
+      <div className="text-sm font-bold">{comma(product.price)}원</div>
     </Card>
   );
 };
