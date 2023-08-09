@@ -6,7 +6,6 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import store from "./store";
 import { QueryClient, QueryClientProvider } from "react-query";
-import Loader from "./components/atoms/Loader";
 
 const queryClient = new QueryClient();
 
@@ -17,7 +16,6 @@ root.render(
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         <App />
-        <Loader />
       </QueryClientProvider>
     </Provider>
   </React.StrictMode>

@@ -4,9 +4,9 @@ export const fetchProducts = (page = 0) => {
   return instance.get(`/products?page=${page}`);
 };
 
-export const fetchProductFromCursor = (cursor) => {
-  return instance.get(`/products?cursor=${cursor}`);
-};
+// export const fetchProductFromCursor = (cursor) => {
+//   return instance.get(`/products?cursor=${cursor}`);
+// };
 
 export const getProductById = (id) => {
   // JS에서는 에러 캐칭은 위에서 (위: false, 아래:true)

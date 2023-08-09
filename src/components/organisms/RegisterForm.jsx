@@ -9,6 +9,7 @@ const staticServerUrl = process.env.REACT_APP_PATH || "";
 
 const RegisterForm = () => {
   const navigate = useNavigate();
+
   const { value, handleOnChange } = useInput({
     username: "",
     email: "",
@@ -16,28 +17,19 @@ const RegisterForm = () => {
     passwordConfirm: "",
   });
 
-  const handleRegister = () => {
-    // api 회원 가입 요청
-    registerUser({
+  const registerReq = () => {
+    register({
       email: value.email,
       password: value.password,
       username: value.username,
-    });
-  };
-
-  const registerUser = (userData) => {
-    register(userData)
+    })
+      // 응답 데이터를 이용하여 회원가입 성공 여부를 확인하고, 처리
       .then((res) => {
-        // 응답 데이터를 이용하여 회원가입 성공 여부를 확인하고, 처리
-        if (res.success) {
-          // 회원가입 성공 시 '/' 경로로 이동
-          alert("회원가입 성공!");
-          navigate(staticServerUrl + "/");
-        } else {
-          // 회원가입 실패 시 에러 메시지 출력 또는 다른 처리
-          alert("회원가입 실패. 다시 시도해주세요.");
-        }
+        alert("회원가입 성공!");
+        // 회원가입 성공 시 '/' 경로로 이동
+        navigate(staticServerUrl + "/");
       })
+      // 에러 났을 시
       .catch((error) => {
         // 에러 처리
         alert("회원가입 요청에 실패했습니다. 다시 시도해주세요.");
@@ -82,7 +74,13 @@ const RegisterForm = () => {
         value={value.passwordConfirm}
         onChange={handleOnChange}
       />
-      <Button onClick={handleRegister}>회원가입</Button>
+      <Button
+        onClick={() => {
+          registerReq();
+        }}
+      >
+        회원가입
+      </Button>
     </Container>
   );
 };

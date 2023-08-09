@@ -7,6 +7,7 @@ const initialState = {
   email: null,
   loading: false,
   token: storedToken ? storedToken : null,
+  username: null,
 };
 
 const userSlice = createSlice({
@@ -19,6 +20,9 @@ const userSlice = createSlice({
     setToken: (state, action) => {
       state.token = action.payload.token;
     },
+    setUsername: (state, action) => {
+      state.username = action.payload.username;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(loginRequest.pending, (state, action) => {
@@ -28,7 +32,8 @@ const userSlice = createSlice({
       state.loading = false;
       state.email = action.payload.email;
       localStorage.setItem("token", action.payload.token);
-      state.token = action.payload.token; //임시
+      state.token = action.payload.token;
+      state.username = action.payload.username;
     });
     builder.addCase(loginRequest.rejected, (state, action) => {
       state.loading = false;
@@ -48,6 +53,6 @@ export const loginRequest = createAsyncThunk(
   }
 );
 
-export const { setEmail, setToken } = userSlice.actions;
+export const { setEmail, setToken, setUsername } = userSlice.actions;
 
 export default userSlice.reducer;
