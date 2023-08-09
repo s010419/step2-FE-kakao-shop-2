@@ -15,25 +15,18 @@ const OptionColumn = ({ product }) => {
       (el) => el.optionId === option.id
     );
 
-    // 이미 선택된 옵션이면 증가
     if (isOptionSelected) {
-      setSelectedOptions((prev) =>
-        prev.map((el) =>
-          el.optionId === option.id ? { ...el, quantity: el.quantity + 1 } : el
-        )
-      );
+      return;
     }
-    else{
-      setSelectedOptions((prev) => [
-        ...prev,
-        {
-          optionId: option.id,
-          quantity: 1,
-          price: option.price,
-          name: option.optionName,
-        },
-      ]);
-    };
+    setSelectedOptions((prev) => [
+      ...prev,
+      {
+        optionId: option.id,
+        quantity: 1,
+        price: option.price,
+        name: option.optionName,
+      },
+    ]);
   };
 
   const handleOnchange = (count, optionId) => {
