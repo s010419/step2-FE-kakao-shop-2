@@ -5,12 +5,12 @@ const Photo = ({ className, src, alt }) => {
   // src 이미지의 경로
   // alt 대체 텍스트로 이미지를 설명하는 내용
   return (
-    <picture className={`rounded-lg ${className}`}>
+    <picture>
       {/* img 태그보다 SEO(search engine optimazation)에 유리하다. 
       아래 두 태그를 받을 수 있기 때문 */}
       <source srcSet={staticServerUrl + src} />
       {/* 웹 이미지 최적화, 최적화된 이미지 포맷을 호환 */}
-      <img src={staticServerUrl + src} alt={alt} />
+      <img className={className} src={staticServerUrl + src} alt={alt} />
       {/* 위와 같이 작성할 경우 브라우저가 가장 호환하는, 제일 용량이 적은걸 기준으로 이미지 출력 */}
     </picture>
   );
