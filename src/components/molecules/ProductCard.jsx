@@ -11,7 +11,7 @@ const ProductCard = ({ product }) => {
         <Photo
           src={product.image}
           alt={product.productName}
-          className="rounded-lg object-cover h-full w-full"
+          className="rounded-lg"
         />
       </div>
       <div className="text-sm font-medium text-gray-500">
