@@ -27,7 +27,7 @@ const LoginForm = () => {
     )
       .then((res) => {
         // 응답 데이터를 이용하여 로그인 성공 여부를 확인하고, 처리
-        if (res.success) {
+        if (res.status === 200) {
           // 로그인 성공 시 '/' 경로로 이동
           alert("로그인 성공!");
           navigate(staticServerUrl + "/");
