@@ -5,9 +5,11 @@ import Counter from "../atoms/Counter";
 import { useMutation } from "react-query";
 import { addCart } from "../../services/cart";
 import Button from "../atoms/Button";
+import { useNavigate } from "react-router-dom";
 
 const OptionColumn = ({ product }) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const navigate = useNavigate();
 
   const handleOnClickOption = (option) => {
     // 이미 선택된 옵션인지 확인
@@ -22,8 +24,7 @@ const OptionColumn = ({ product }) => {
           el.optionId === option.id ? { ...el, quantity: el.quantity + 1 } : el
         )
       );
-    }
-    else{
+    } else {
       setSelectedOptions((prev) => [
         ...prev,
         {
@@ -33,7 +34,7 @@ const OptionColumn = ({ product }) => {
           name: option.optionName,
         },
       ]);
-    };
+    }
   };
 
   const handleOnchange = (count, optionId) => {
@@ -53,6 +54,18 @@ const OptionColumn = ({ product }) => {
   // 장바구니 담기 api 처리
   const { mutate } = useMutation({
     mutationFn: addCart,
+    onError: (error) => {
+      if (error.response && error.response.status === 401) {
+        // 401 Unauthorized 에러 발생 시
+        alert("로그인 후 이용해주세요.");
+        navigate(staticServerUrl + "/login"); // 로그인 페이지로 이동
+      } else {
+        alert("장바구니 담기에 실패했습니다. 오류: " + error.message);
+      }
+    },
+    onSuccess: () => {
+      alert("장바구니에 담겼습니다.");
+    },
   });
 
   return (
@@ -108,15 +121,7 @@ const OptionColumn = ({ product }) => {
                   optionId: el.optionId,
                   quantity: el.quantity,
                 };
-              }),
-              {
-                onSuccess: () => {
-                  alert("장바구니에 담겼습니다.");
-                },
-                onError: (error) => {
-                  alert("장바구니 담기에 실패했습니다. 오류: " + error.message);
-                },
-              }
+              })
             );
           }}
         >
