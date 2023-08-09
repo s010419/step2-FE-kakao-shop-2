@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "../../styles/atoms/Card.css"
+// import "../../styles/atoms/Card.css"
 
 const Card = ({ to, children }) => {
   // to 이동할 경로
