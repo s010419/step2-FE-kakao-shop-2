@@ -6,7 +6,7 @@ const Card = ({ to, children }) => {
   return (
     // Link element react 개발시 꼭 사용!
     // Link : react 상에서 페이지 변화하는 형태로 작동하지 않음, UX적으로도 부드럽게 작동
-    <Link to={to}>{children}</Link>
+    <Link className="" to={to}>{children}</Link>
   );
 };
 
