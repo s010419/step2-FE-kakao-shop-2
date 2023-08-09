@@ -1,0 +1,30 @@
+.product-card {
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  width: 250px;
+}
+
+.product-photo {
+  height: 240px;
+}
+
+.product-photo img {
+  border-radius: 10px;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.product-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #777;
+  margin-top: 6px;
+}
+
+.product-price {
+  font-size: 14px;
+  font-weight: bold;
+}
