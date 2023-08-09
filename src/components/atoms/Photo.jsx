@@ -1,4 +1,4 @@
-import "../../styles/atoms/Photo.css";
+// import "../../styles/atoms/Photo.css";
 
 const staticServerUrl = process.env.REACT_APP_PATH || "";
 
