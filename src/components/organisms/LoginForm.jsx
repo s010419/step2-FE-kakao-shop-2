@@ -25,9 +25,10 @@ const LoginForm = () => {
         password: value.password,
       })
     )
+      .unwrap()
       .then((res) => {
         // 응답 데이터를 이용하여 로그인 성공 여부를 확인하고, 처리
-        if (res.status === 200) {
+        if (res.token) {
           // 로그인 성공 시 '/' 경로로 이동
           alert("로그인 성공!");
           navigate(staticServerUrl + "/");
