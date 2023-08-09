@@ -31,8 +31,9 @@ const userSlice = createSlice({
     builder.addCase(loginRequest.fulfilled, (state, action) => {
       state.loading = false;
       state.email = action.payload.email;
-      localStorage.setItem("token", action.payload.token);
-      state.token = action.payload.token;
+      const tokenWithoutBearer = action.payload.token.replace("Bearer ", "");
+      localStorage.setItem("token", tokenWithoutBearer);
+      state.token = tokenWithoutBearer;
       state.username = action.payload.username;
     });
     builder.addCase(loginRequest.rejected, (state, action) => {
