@@ -1,5 +1,3 @@
-import { Suspense } from "react";
-import Loader from "../components/atoms/Loader";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import { getOrderFromId } from "../services/order";
@@ -11,11 +9,7 @@ const OrderCompletePage = () => {
   // 완료된 결제 정보를 불러오기
   const { data } = useQuery(`/orders/${id}`, () => getOrderFromId(id));
 
-  return (
-    <Suspense fallback={<Loader />}>
-      <OrderCompleteTemplate data={data} />
-    </Suspense>
-  );
+  return <OrderCompleteTemplate data={data} />;
 };
 
 export default OrderCompletePage;
