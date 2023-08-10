@@ -10,7 +10,7 @@ import { updateCart } from "../../services/cart";
 
 const staticServerUrl = process.env.REACT_APP_PATH || "";
 
-const CartList = ({ data }) => {
+const CartList = () => {
   const { data } = useQuery(["cart"], getCart, {
     suspense: true,
   });
