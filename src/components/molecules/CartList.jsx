@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Container from "../atoms/Container";
 import Box from "../atoms/Box";
 import CartItem from "../atoms/CartItem";
-import Card from "../atoms/Card";
 import { comma } from "../../utils/convert";
 import Button from "../atoms/Button";
 import { useMutation } from "react-query";
@@ -12,6 +11,10 @@ import { updateCart } from "../../services/cart";
 const staticServerUrl = process.env.REACT_APP_PATH || "";
 
 const CartList = ({ data }) => {
+  const { data } = useQuery(["cart"], getCart, {
+    suspense: true,
+  });
+
   const navigate = useNavigate();
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -48,15 +51,15 @@ const CartList = ({ data }) => {
             quantity,
           },
         ];
+      } else {
+        return [
+          ...prev,
+          {
+            cartId: optionId,
+            quantity,
+          },
+        ];
       }
-
-      return [
-        ...prev,
-        {
-          cartId: optionId,
-          quantity,
-        },
-      ];
     });
 
     setTotalPrice((prev) => prev + price);
@@ -80,7 +83,7 @@ const CartList = ({ data }) => {
       <Box>
         <h1>장바구니</h1>
       </Box>
-      <Card>
+      <Box>
         {Array.isArray(cartItems) &&
           cartItems.map((item) => {
             return (
@@ -91,13 +94,13 @@ const CartList = ({ data }) => {
               />
             );
           })}
-      </Card>
-      <Card>
+      </Box>
+      <Box>
         <div className="row">
           <span className="expect">주문 예상금액</span>
           <div className="sum-price">{comma(totalPrice)}원</div>
         </div>
-      </Card>
+      </Box>
       <Button
         className="order-btn"
         onClick={() => {
@@ -106,7 +109,7 @@ const CartList = ({ data }) => {
               navigate(staticServerUrl + "/order");
             },
             onError: (error) => {
-              alert("에러 발생");
+              alert(error.message);
             },
           });
         }}
